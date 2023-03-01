@@ -81,4 +81,4 @@ print(sentiment_analysis(test_sent3))
 print(classifier1.classify(test_sent3))
 
 print("classifier 1 accuracy: %.3f" % classifier1.accuracy(test)) #accuracy of classifier given test data
-print("classifier 2 accuracy: %.3f" % classifier2.accuracy(test))
+print("classifier 2 accuracy: %.3f" % classifier2.accuracy(test)) #accuracy of classifier with new feature extractor
