@@ -1,5 +1,7 @@
 from textblob import TextBlob
 from textblob.classifiers import NaiveBayesClassifier
+import json
+import os
 
 #start https://textblob.readthedocs.io/en/dev/quickstart.html#tokenization
 #classifiers https://textblob.readthedocs.io/en/dev/classifiers.html#classifiers
@@ -42,6 +44,34 @@ def sentiment_analysis(sentence):
     return [pol,sub]
     #return sentence
 
+def sentiment_classify(sentence):
+    score = sentiment_analysis(sentence)
+    if score[0] >= 0.03:
+        return "pos"
+    elif score[0] <= -0.03:
+        return "neg"
+    else:
+        return "neu"
+
+def compare(data, annotations): #compares how many we correctly classify
+    num_correct = 0
+    total = 0
+    sentence_list = []
+    for i in data['body-paragraphs']:
+        for j in i:
+            sentence_list.append(j)
+    for phrase in annotations["phrase-level-annotations"]:
+        if(phrase["id"] == "title"):
+            if (sentiment_classify(data["title"]) == phrase["polarity"]):
+                num_correct += 1
+            total += 1
+        else:
+            sentence_id = int(phrase["id"][1:])
+            if (sentiment_classify(sentence_list[sentence_id]) == phrase["polarity"]):
+                num_correct += 1
+            total += 1
+    return total, num_correct
+
 def tokenize_words(text):
     return TextBlob(text).words
 
@@ -59,6 +89,8 @@ def end_word_extractor(document):
      feats["first({0})".format(first_word)] = True
      feats["last({0})".format(last_word)] = False
      return feats
+
+###START OF TESTING CODE
 
 classifier1 = NaiveBayesClassifier(train)
 classifier2 = NaiveBayesClassifier(train, feature_extractor=end_word_extractor)
@@ -81,4 +113,32 @@ print(sentiment_analysis(test_sent3))
 print(classifier1.classify(test_sent3))
 
 print("classifier 1 accuracy: %.3f" % classifier1.accuracy(test)) #accuracy of classifier given test data
-print("classifier 2 accuracy: %.3f" % classifier2.accuracy(test)) #accuracy of classifier with new feature extractor
+print("classifier 2 accuracy: %.3f" % classifier2.accuracy(test))
+
+file_list = []
+
+for i in range(10):
+    file_i = os.listdir("BASILdata/articles/201" + str(i))
+    for file_name in file_i:
+        file = open("BASILdata/articles/201" + str(i) + "/" + file_name, encoding="utf8")
+        json_file = json.load(file)
+        file_list.append(json_file)
+        
+annotation_file_list = []
+for i in range(10):
+    file_i = os.listdir("BASILdata/annotations/201" + str(i))
+    for file_name in file_i:
+        file = open("BASILdata/annotations/201" + str(i) + "/" + file_name, encoding="utf8")
+        json_file = json.load(file)
+        annotation_file_list.append(json_file)
+total_correct = 0
+total = 0
+for i in range(len(file_list)):
+    data = file_list[i]
+    annotations = annotation_file_list[i]
+    a, b = compare(data, annotations)
+    total += a
+    total_correct += b
+accuracy = total_correct/total
+print("BASIL correct: %.3f , BASIL total: %.3f" %(total_correct, total))
+print(accuracy)
