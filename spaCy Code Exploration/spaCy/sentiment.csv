@@ -1,0 +1,4 @@
+,Address,Sentiment Score,Sentiment Label,Positive Words,Negative Words
+0,https://www.nbcnews.com/news/us-news/ohio-derailment-waste-prompts-health-concerns-far-away-rcna72987,0.08,Positive,"successfully, more, :3, large, near, live","killed, forced, single, dead, least"
+1,https://www.cnn.com/2023/02/28/health/moderate-physical-activity-cancer-death-risk-wellness/index.html,0.08,Positive,,
+2,https://abcnews.go.com/US/chicago-cop-shot-killed-responding-call-police/story?id=97567183,0.08,Positive,,
