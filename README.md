@@ -8,7 +8,7 @@ The model is broken into several different .ipynb files. To do any type of analy
 
 ### Installs
 Run on initial startup.
-The very first code block of Project_Pipeline.ipynb includes all the installations one should need to use the notebook. You can run the entire code block and it will auto install for you. You can see this code block below:
+The very first code block of Project_Pipeline.ipynb includes all the installations one should need to use the notebook. You can run the entire code block and it will auto-install for you. You can see this code block below:
 ```
 # Dataframe and sentiment analysis
 !pip install pandas
@@ -53,14 +53,20 @@ Seaborn: Used for displaying data visualizations
 
 ### Imports
 Run on every startup.
-After our installs code block we have our imports. If all the installs installed successfully this code block should run without issue. This code block is used to import all the dependencies for the model.
+After our installs code block, we have our imports. If all the installs are installed successfully this code block should run without issue. This code block is used to import all the dependencies for the model.
 
 ### Connect Helper Files
 Run on every startup.
-This code block is used to connect all the helper files to the main pipeline. This code block allows for the pipeline to be condensed and easy to read/use.
-
-### Side Note
-The sections from this point down will need to be run every time you want to analyze a new set of articles or change settings. Installs only needs to be ran the first time you use this project. Imports and Connect Helper Files needs to be ran when you first open the file but does not need to be ran every time you try a new set of articles or change settings.
+This code block is used to connect all the helper files to the main pipeline. This code block allows for the pipeline to be condensed and easy to read/use. The files are nicely labeled so it's easy to see which file does what.
+```
+%run SentimentAnalysis.ipynb
+%run WebScraper.ipynb
+%run PipelineHelpers.ipynb
+%run TopicModeling.ipynb
+%run DataVisualization.ipynb
+```
+## Side Note
+The sections from this point down will need to be run every time you want to analyze a new set of articles or change settings. Installs only need to be run the first time you use this project. Imports and Connect Helper Files need to be run when you first open the file but do not need to be run every time you try a new set of articles or change settings.
 
 ### General Pipeline Settings, and Pre-Analysis Setup
 This code block is where you can change the settings of the web scrapping and topic analysis. In addition, this is also where you put the URL to the .csv file you want scraped. We will walk through each setting in this section.
@@ -70,22 +76,22 @@ PICTURE OF HOW THE CSV SHOULD LOOK
 
 word_count_filter : This setting sets the minimum amount of words that are allowed in an article. For example, if the word count is set to 150 any article that contains less than 150 words will not be included in the data frame. 
 
-repeated_phrase_filter : This setting is used to prevent any scrapping blockers from runining the data. For example, if a website puts up a blocker and the scrapper just returns "Access Denied" over and over again this setting prevents that article from being added to the dataframe.
+repeated_phrase_filter : This setting is used to prevent any scrapping blockers from running the data. For example, if a website puts up a blocker and the scrapper just returns "Access Denied" over and over again this setting prevents that article from being added to the data frame.
 
-social_starts_with : This setting is used to prevent social media sites from being scraped. These sites usually don't get scrapped very well and pertain to people's opinions rather than articles themselves. It's important to note that you can add to this list, and it doesn't pertain to just social media sites. If you notice that a specific site doesn’t scrape very well, you can always add it to this list.
+social_starts_with : This setting is used to prevent social media sites from being scraped. These sites usually don't get scrapped very well and pertain to people's opinions rather than the articles themselves. It's important to note that you can add to this list, and it doesn't pertain to just social media sites. If you notice that a specific site doesn’t scrape very well, you can always add it to this list.
 
 url_max : This setting is used to set how many articles are scraped. If you attach a CSV with 3000 rows but only want to scrape 300 you can set this to 300 and scrape only those 300. If you don't want a limit you can set this to -1.
 
-label_adjuster_on : This setting is used to create dynamic sentiment labels. This allows for more accurate sentiment labeling. For example, if you have articles about a war, most all articles are going to be labeled negative because of words like 'death', 'war', 'kill', etc. Turning this setting on creates labels based off the sentiment percentiles, for example every article that has a sentiment in the 40-60 percentile is neutral while every article in the 80-100 percentile is labeled positive. 
+label_adjuster_on : This setting is used to create dynamic sentiment labels. This allows for more accurate sentiment labeling. For example, if you have articles about war, almost all articles are going to be labeled negative because of words like 'death', 'war', 'kill', etc. Turning this setting on creates labels based on the sentiment percentiles, for example, every article that has a sentiment in the 40-60 percentile is neutral while every article in the 80-100 percentile is labeled positive. 
 
 topic_model_dict : This setting contains the settings for topic modeling. topic_limit is the number of topics that the model will find within the space. topic_start is the number of topics we start at and topic_step is how many we increment every step.
 
 ## Pipeline Start
-This is where the webscrapping, sentiment analysis, and the topic modeling begin. The first block is the Sentiment Analysis Pipeline. Within this block the articles are scraped, then they are run through sentiment analysis, and a data frame is returned.
+This is where the web scrapping, sentiment analysis, and topic modeling begin. The first block is the Sentiment Analysis Pipeline. Within this block the articles are scraped, then they are run through sentiment analysis, and a data frame is returned.
 
-Then the topic modeling starts. The function will create topic models with varying number of topics, compute the topic coherence score for that number of topics over our articles, and return to us the LDA model that has the highest coherence score. It will display a small graphic showing the topic coherence for each number of topics we tested. Next, we will create our topic-level sentiment analysis dictionary using both our dataframe df and the new LDA_model and corpus we just created. This will give us a dictionary of the average sentiment scores for every topic of an article, for all articles.
+Then the topic modeling starts. The function will create topic models with varying numbers of topics, compute the topic coherence score for that number of topics over our articles, and return to us the LDA model that has the highest coherence score. It will display a small graphic showing the topic coherence for each number of topics we tested. Next, we will create our topic-level sentiment analysis dictionary using both our data frame df and the new LDA_model and corpus we just created. This will give us a dictionary of the average sentiment scores for every topic of an article, for all articles.
 
-After this section is ran all rows and columns have been added to the data frame.
+After this section is run all rows and columns have been added to the data frame.
 
 
 ## Data Visualization Setup
@@ -124,11 +130,11 @@ Will iterate through our list_of_topics_to_visualize and will make a graph for e
 
 
 ### Generating 2D and 3D Cluster Graphs of Topics (K means Clustering)
-Generate a visual of number of topic clusters vs inertia (WCSS score) of the model (low inertia is good). We want to find the optimal number of topic clusters to use, and you can use the "elbow method" on this graph to find it. Ideally, the number of clusters is as small as possible, and the inertia is also as small as possible. So, to find the point where increasing the number of clusters gives diminishing returns on the inertia score, we imagine the line graph as an arm and use the number of clusters at the "elbow", or the point on the graph where the slope becomes much closer to 0 than the point before.
+Generate a visual of the number of topic clusters vs inertia (WCSS score) of the model (low inertia is good). We want to find the optimal number of topic clusters to use, and you can use the "elbow method" on this graph to find it. Ideally, the number of clusters is as small as possible, and the inertia is also as small as possible. So, to find the point where increasing the number of clusters gives diminishing returns on the inertia score, we imagine the line graph as an arm and use the number of clusters at the "elbow", or the point on the graph where the slope becomes much closer to 0 than the point before.
 
-This will generate the topic space in 2D with every article represented as a single point. Very similar to the t-SNE clustering graph, this visualization has the same goal: show topic clusters of articles that are very similar in topic and overall theme. Points closer together means they have very similar topics, while points further apart will be less related. This visualization uses the relevance of each topic to an article as the data behind the clustering. Articles are colored by the user-selected number of clusters (not by main topic).
+This will generate the topic space in 2D with every article represented as a single point. Very similar to the t-SNE clustering graph, this visualization has the same goal: show topic clusters of articles that are very similar in topic and overall theme. Points closer together mean they have very similar topics, while points further apart will be less related. This visualization uses the relevance of each topic to an article as the data behind the clustering. Articles are colored by the user-selected number of clusters (not by the main topic).
 
-This visualization is a 3D version of the one above, with a 3rd dimension added to represent sentiment value of each article. So, the 2D xy-plane will be exactly the same as the visualization above--meant to represent articles in the topic space and how they are related by topic. The third dimension will show every article's sentiment value, to show how clusters or individual articles differ by sentiment (or are closely related!)
+This visualization is a 3D version of the one above, with a 3rd dimension added to represent the sentiment value of each article. So, the 2D xy-plane will be exactly the same as the visualization above--meant to represent articles in the topic space and how they are related by topic. The third dimension will show every article's sentiment value, to show how clusters or individual articles differ by sentiment (or are closely related!)
 
 
 ### Relevance X Sentiment of Articles K-Means
