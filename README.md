@@ -1,5 +1,11 @@
-## Abstract
-INSERT ABSTRACT HERE
+# Probabilistic News Model
+## Created by the Probabilistic News Team Gabriel Sams, William Hiatt, Deven Biehler, and Professor Balasubramanian ‘Subu’ Kandaswamy
+Sponsoring Organization: The Army Cyber Institute (ACI) at West Point is our sponsoring organization. ACI is responsible for performing advisement, research, and analysis on any and all things within the cyberspace domain in support of the Army’s strategic objectives. 
+Sponsor: Our sponsor and contact is MAJ Iain Cruickshank.
+
+The ACI wanted to develop a non-deterministic model that allows social scientists and other domain experts to gain insight into a news article space. The goal of this project is to combat the propagation of misinformation by identifying bias and establishing connections among news articles based on their biases. 
+The project should take news articles and provide the major topics of every article as well as the articles’ opinions/attitudes on the topics they discuss. The model should provide meaningful visualizations that give insight into how articles are related by opinion and topics. The Probabilistic News Model project addresses this problem by creating a new machine-learning pipeline through a combination of research and code exploration, ultimately creating a customizable application that can handle varying sizes of news article databases. 
+This project was implemented using Python and associated Python libraries It uses a machine learning pipeline architecture with clustering methods and visualization. With our project, ACI at West Point now has a method of measuring news article sentiment and topics without human bias, and can rapidly assess a large number of articles without humans having to read and annotate them. The project is also designed to support new additions to the code and swapping out Python libraries for contemporary libraries so that it can be expanded upon in the future.
 
 
 ## How to use the Model
@@ -154,18 +160,21 @@ With that information, we use the same clustering algorithm as the 2D k-means gr
 
 
 ### Sentiment vs Relevance Per Topic
-
+A scatter plot of sentiment values against relevance values of each selected topic. This will display a scatter plot with sentiment values on the x-axis and relevance values on the y-axis, along with a tooltip. 
 
 ### Topic Space
+Applying principle component analysis(PCA) will reduce the high-dimensional topic space into a simple two-dimensional space. 2 dimensions are easy for us to interpret but also hold a lot of information.
+
+Visualize the topic space after principle component analysis(PCA) is applied to reduce the topic model results to two dimensions. Plots each point in the topic space, the distance is directly related to how similar the topics are to each other. This will expose any outlier topics as well as topics that might be quite similar. The ideal plot is one where topics are equal distance from each other.
 
 ### Document Sentiment in Topic Space
+Here is where each document is added to the topic space, the documents are closer or further from each topic based on the relevance score given to each document. Then a color is added to each document to represent the sentiment score. Red represents a negative sentiment while green represents a positive sentiment.
 
 ### Document Density in Topic Space
-
-### Topic per Document in Topic Space
+This plots the density of documents that were plotted in the topic space. Red is hot zones where many documents fall while white is where very few documents show up. This will help us understand the topics that the majority of the articles are covering.
 
 ### Sentiment Sum Heatmap in Topic Space
-
+This graph plots the normalized sentiment in each area of the topic space. Green is the more positive topics, while red is more negative. Each document's sentiment is added to the area of the heatmap and then normalized to be able to visualize where the positive and negative topics lie in the topic space more easily.
 
 
 ## References
