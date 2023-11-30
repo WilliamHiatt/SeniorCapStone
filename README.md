@@ -11,6 +11,25 @@ This project was implemented using Python and associated Python libraries It use
 ## How to use the Model
 The model is broken into several different .ipynb files. To do any type of analysis only the Project_Pipeline.ipynb folder needs to be used. If you aren't making any code changes and just doing analysis there is no need to go into the other files. Therefore, this readme is going to go into depth on only the pipeline.
 
+## Quick Start
+Via cloneing the repo:
+1. Clone the main branch repo onto your computer.
+2. Inside the "Working Product" folder open Project_Pipeline.ipynb to start running the model.
+3. Run the Installs code block. (Only need to run this on the initial setup)
+4. Run each code block after Installs in order from top to bottom.
+5. Depending on your computer specs and the size of your Excel file this may take a substantial amount of time.
+6. Enjoy the visualizations!
+
+Via Zip:
+1. From the GitHub repo, download the main branch ZIP file.
+2. Extract anywhere on your computer, or copy and paste the "Working Product" folder anywhere (it must no longer be in ZIP format to run).
+3. Inside the "Working Product" folder that you extracted, open Project_Pipeline.ipynb to start running the model.
+4. Run the Installs code block. (Only need to run this on the initial setup)
+5. Run each code block after Installs in order from top to bottom.
+6. Depending on your computer specs and the size of your Excel file this may take a substantial amount of time.
+7. Enjoy the visualizations!
+
+
 ### Installs
 **Run on initial startup.**
 The very first code block of Project_Pipeline.ipynb includes all the installations one should need to use the notebook. You can run the entire code block and it will auto-install for you. You can see this code block below:
