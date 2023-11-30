@@ -12,7 +12,7 @@ This project was implemented using Python and associated Python libraries It use
 The model is broken into several different .ipynb files. To do any type of analysis only the Project_Pipeline.ipynb folder needs to be used. If you aren't making any code changes and just doing analysis there is no need to go into the other files. Therefore, this readme is going to go into depth on only the pipeline.
 
 ## Quick Start
-Via cloneing the repo:
+Via cloning the repo:
 1. Clone the main branch repo onto your computer.
 2. Inside the "Working Product" folder open Project_Pipeline.ipynb to start running the model.
 3. Run the Installs code block. (Only need to run this on the initial setup)
