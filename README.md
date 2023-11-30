@@ -130,27 +130,49 @@ This section shows a snippet of the data frame.
 ### Display the topic model words
 This section shows the words associated with each topic.
 
+<img width="100" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/bab9ff59-57e1-4ecc-af22-98a719498cd7">
+
 
 ### Visualize all articles on their main topic
 Here we will show two simple graphs plotting all articles' sentiment values, with the articles sorted by main topic. This is to show the distribution of sentiment towards the different topics. The scatter plot will let you look at each article individually, to see how each article contributes to the sentiment distribution. The box plot will show you the actual sentiment distribution for each topic and give details on the variance and average sentiment of a topic.
 
+<img width="1571" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/12da282b-1ded-4384-8473-459d7f70d655">
+
+<img width="1571" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/e4acc0ec-480e-412f-b22b-859f96d6c1b8">
+
+
+
 ### Generating 2D and 3D Cluster Graphs of Topics (T-SNE)
 This visualization generates a 2D clustering graph representing each article as a point in the topic space, which uses t-SNE dimensionality reduction and clustering. The goal of this visualization is to show every article compared to each other by their similarity in topics. You should see clusters of articles that share a lot of topic words and overall themes, while articles that differ in their topics are shown far apart. Colored by an article's main topic.
 
+<img width="637" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/eb00146b-5824-4692-9dc8-84a9e99f4d43">
 
 This generates a 3D clustering graph where the x and y-axis represent each article in the topic space, and the z-axis shows the sentiment value for each article. The 2D xy-plane is exactly the same as the 2D graph generated above, but we add a 3rd dimension in the form of sentiment to show how article clusters differ by their sentiment value as well as their topics. Colored by main topic.
+
+<img width="626" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/5b3cea1e-0c29-48f9-9d1a-314cbd3aa8c3">
 
 
 ### Subjectivity vs Sentiment of Articles for a single topic
 Will iterate through our `list_of_topics_to_visualize` and will make a graph for each topic number in that list as well as that topic's word cloud of the top 10 topic words for that topic. So, for each topic we want to look at, it will show all the articles with that topic as their main topic, and plot the articles on their subjectivity vs sentiment. A higher subjectivity will show you that the author chose more opinionated words, rather than relying on neutral, factual statements. Compare that with the sentiment value to show whether they are positive and negative towards that topic, and how factual vs. opinionated their claims were. The word cloud will simply tell you what words are in that topic.
 
+<img width="610" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/b2643c61-12fc-45fc-85a1-921e5f991925">
+
+<img width="314" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/6a238f16-16ce-44aa-954f-9c6b38ded335">
+
 
 ### Generating 2D and 3D Cluster Graphs of Topics (K means Clustering)
 Generate a visual of the number of topic clusters vs inertia (WCSS score) of the model (low inertia is good). We want to find the optimal number of topic clusters to use, and you can use the "elbow method" on this graph to find it. Ideally, the number of clusters is as small as possible, and the inertia is also as small as possible. So, to find the point where increasing the number of clusters gives diminishing returns on the inertia score, we imagine the line graph as an arm and use the number of clusters at the "elbow", or the point on the graph where the slope becomes much closer to 0 than the point before.
 
+<img width="458" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/6930ce02-b310-4955-9095-a8fb44b0049d">
+
+
 This will generate the topic space in 2D with every article represented as a single point. Very similar to the t-SNE clustering graph, this visualization has the same goal: show topic clusters of articles that are very similar in topic and overall theme. Points closer together mean they have very similar topics, while points further apart will be less related. This visualization uses the relevance of each topic to an article as the data behind the clustering. Articles are colored by the user-selected number of clusters (not by the main topic).
 
+<img width="1608" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/921999f5-31b5-40ef-a3a3-c29b6eb75389">
+
 This visualization is a 3D version of the one above, with a 3rd dimension added to represent the sentiment value of each article. So, the 2D xy-plane will be exactly the same as the visualization above--meant to represent articles in the topic space and how they are related by topic. The third dimension will show every article's sentiment value, to show how clusters or individual articles differ by sentiment (or are closely related!)
+
+<img width="308" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/9dd19680-d334-4fdb-8da8-274efd3c3b23">
 
 
 ### Relevance X Sentiment of Articles K-Means
@@ -158,23 +180,39 @@ This visualization is a 2D clustering (using k-means) of the sentiment-weighted 
 
 With that information, we use the same clustering algorithm as the 2D k-means graph above to produce a 2D topic space for every article, but this time it is weighted by the article's sentiment towards the topics.
 
+<img width="1616" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/6bc2ef17-c505-4715-b380-c95e2908241b">
+
 
 ### Sentiment vs Relevance Per Topic
-A scatter plot of sentiment values against relevance values of each selected topic. This will display a scatter plot with sentiment values on the x-axis and relevance values on the y-axis, along with a tooltip. 
+A scatter plot of sentiment values against relevance values of each selected topic. This will display a scatter plot with sentiment values on the x-axis and relevance values on the y-axis, along with a tooltip.
+
+<img width="452" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/379ff5d6-1a99-49f8-b299-387e8ee641e1">
+
 
 ### Topic Space
 Applying principle component analysis(PCA) will reduce the high-dimensional topic space into a simple two-dimensional space. 2 dimensions are easy for us to interpret but also hold a lot of information.
 
 Visualize the topic space after principle component analysis(PCA) is applied to reduce the topic model results to two dimensions. Plots each point in the topic space, the distance is directly related to how similar the topics are to each other. This will expose any outlier topics as well as topics that might be quite similar. The ideal plot is one where topics are equal distance from each other.
 
+<img width="376" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/48753580-b1c6-49a3-a237-505e073ce119">
+
+
 ### Document Sentiment in Topic Space
 Here is where each document is added to the topic space, the documents are closer or further from each topic based on the relevance score given to each document. Then a color is added to each document to represent the sentiment score. Red represents a negative sentiment while green represents a positive sentiment.
+
+<img width="292" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/3036e163-cdf4-49e3-9623-c7bc4b4019d4">
+
 
 ### Document Density in Topic Space
 This plots the density of documents that were plotted in the topic space. Red is hot zones where many documents fall while white is where very few documents show up. This will help us understand the topics that the majority of the articles are covering.
 
+<img width="448" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/65a88149-7e0a-49e0-9b37-7677c4ebdcc0">
+
+
 ### Sentiment Sum Heatmap in Topic Space
 This graph plots the normalized sentiment in each area of the topic space. Green is the more positive topics, while red is more negative. Each document's sentiment is added to the area of the heatmap and then normalized to be able to visualize where the positive and negative topics lie in the topic space more easily.
+
+<img width="308" alt="image" src="https://github.com/WSUCapstoneS2023/Media-Bias-Prediction-Model/assets/98793239/83cca970-5d08-42d0-885d-e17035d09503">
 
 
 ## References
